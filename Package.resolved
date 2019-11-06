@@ -1,0 +1,43 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "CryptoSwift",
+        "repositoryURL": "https://github.com/krzyzanowskim/CryptoSwift.git",
+        "state": {
+          "branch": null,
+          "revision": "3a2acbb32ab68215ee1596ee6004da8e90c3721b",
+          "version": "1.0.0"
+        }
+      },
+      {
+        "package": "SwiftProtobuf",
+        "repositoryURL": "https://github.com/apple/swift-protobuf.git",
+        "state": {
+          "branch": null,
+          "revision": "da75a93ac017534e0028e83c0e4fc4610d2acf48",
+          "version": "1.7.0"
+        }
+      },
+      {
+        "package": "SwiftGD",
+        "repositoryURL": "https://github.com/JacopoMangiavacchi/SwiftGD.git",
+        "state": {
+          "branch": null,
+          "revision": "9b1a71da121e3db1c85a25e7a8e3b658ee7c5c32",
+          "version": "2.5.1"
+        }
+      },
+      {
+        "package": "SwiftTFRecords",
+        "repositoryURL": "https://github.com/jacopomangiavacchi/SwiftTFRecords.git",
+        "state": {
+          "branch": null,
+          "revision": "9a7c29afc41cc25341ef4cb08b15a6b74fbb9bd1",
+          "version": "1.0.4"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
