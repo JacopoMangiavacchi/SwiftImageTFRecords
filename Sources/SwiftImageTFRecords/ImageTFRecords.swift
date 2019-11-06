@@ -53,18 +53,28 @@ public struct ImageTFRecord {
         self.annotation = annotation
     }
     
-    public init(withRecord: Record) {
-        // TODO
-        self.width = 0
-        self.height = 0
-        self.filename = "filename"
-        self.encoded = Data()
-        self.format = "format"
+    public init(withRecord record: Record) {
+        self.width = record["image/width"]!.toInt()!
+        self.height = record["image/height"]!.toInt()!
+        self.filename = record["image/filename"]!.toString()!
+        self.encoded = record["image/encoded"]!.toBytes()!
+        self.format = record["image/format"]!.toString()!
+        
+        // TODO Annotations
         self.annotation = nil
     }
     
     public var record: Record {
-        // TODO
-        Record()
+        var record = Record()
+        
+        record["image/width"] = Feature.Int(width)
+        record["image/height"] = Feature.Int(height)
+        record["image/filename"] = Feature.Bytes(Data(String("\(filename)").utf8))
+        record["image/encoded"] = Feature.Bytes(encoded)
+        record["image/format"] = Feature.Bytes(Data(String("\(format)").utf8))
+            
+        // TODO Annotations
+        
+        return record
     }
 }
