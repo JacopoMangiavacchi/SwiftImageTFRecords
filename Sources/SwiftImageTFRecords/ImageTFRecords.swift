@@ -69,9 +69,9 @@ public struct ImageTFRecord {
         
         record["image/width"] = Feature.Int(width)
         record["image/height"] = Feature.Int(height)
-        record["image/filename"] = Feature.Bytes(Data(String("\(filename)").utf8))
+        record["image/filename"] = Feature.String(filename)
         record["image/encoded"] = Feature.Bytes(encoded)
-        record["image/format"] = Feature.Bytes(Data(String("\(format)").utf8))
+        record["image/format"] = Feature.String(format)
             
         // TODO Annotations
         
