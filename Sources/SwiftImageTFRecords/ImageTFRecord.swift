@@ -47,7 +47,7 @@ public struct ImageTFRecord {
         let yMinArray = record["image/object/bbox/ymin"]!.toFloatArray()!
         let xMaxArray = record["image/object/bbox/xmax"]!.toFloatArray()!
         let yMaxArray = record["image/object/bbox/ymax"]!.toFloatArray()!
-        let lextArray = record["image/object/class/text"]!.toStringArray()!   Add BytesArray support !!!!!!!
+        let lextArray = record["image/object/class/text"]!.toStringArray()!
         let labelArray = record["image/object/class/label"]!.toIntArray()!
 
         
