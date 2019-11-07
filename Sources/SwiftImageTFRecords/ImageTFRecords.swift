@@ -9,7 +9,7 @@ import Foundation
 import SwiftTFRecords
 
 public struct ImageTFRecords {
-    var images: [ImageTFRecord]
+    public var images: [ImageTFRecord]
     
     public init() {
         self.images = [ImageTFRecord]()

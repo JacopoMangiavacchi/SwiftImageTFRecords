@@ -43,14 +43,13 @@ public struct ImageTFRecord {
         self.encoded = record["image/encoded"]!.toBytes()!
         self.format = record["image/format"]!.toString()!
         
-        let xMinArray = record["image/object/bbox/xmin"]!.toFloatArray()!
-        let yMinArray = record["image/object/bbox/ymin"]!.toFloatArray()!
-        let xMaxArray = record["image/object/bbox/xmax"]!.toFloatArray()!
-        let yMaxArray = record["image/object/bbox/ymax"]!.toFloatArray()!
-        let textArray = record["image/object/class/text"]!.toStringArray()!
-        let labelArray = record["image/object/class/label"]!.toIntArray()!
-
-        guard xMinArray.count == yMinArray.count &&
+        guard let xMinArray = record["image/object/bbox/xmin"]?.toFloatArray(),
+              let yMinArray = record["image/object/bbox/ymin"]?.toFloatArray(),
+              let xMaxArray = record["image/object/bbox/xmax"]?.toFloatArray(),
+              let yMaxArray = record["image/object/bbox/ymax"]?.toFloatArray(),
+              let textArray = record["image/object/class/text"]?.toStringArray(),
+              let labelArray = record["image/object/class/label"]?.toIntArray(),
+              xMinArray.count == yMinArray.count &&
               xMinArray.count == xMaxArray.count &&
               xMinArray.count == yMaxArray.count &&
               xMinArray.count == textArray.count &&
