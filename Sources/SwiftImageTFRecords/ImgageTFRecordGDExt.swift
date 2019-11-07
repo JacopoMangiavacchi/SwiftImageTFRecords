@@ -10,18 +10,15 @@ import SwiftGD
 
 // Image processing extension
 extension ImageTFRecord {
-    public init?(url: URL) {
+    public init?(imageFile url: URL, imageName: String) {
         guard let image = Image(url: url),
               let data = try? image.export() else { return nil }
 
-        let fileName = url.lastPathComponent
-        let fileType = url.pathExtension.lowercased()
-
         self.init(width: image.size.width,
                   height: image.size.height,
-                  filename: fileName,
+                  filename: imageName,
                   encoded: data,
-                  format: fileType,
+                  format: url.pathExtension.lowercased(),
                   annotations: nil)
     }
     

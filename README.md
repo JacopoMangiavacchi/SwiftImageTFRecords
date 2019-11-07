@@ -11,6 +11,21 @@ If your using this library on a Swift Jupyter or Colab Notebook you may install 
 %install '.package(url: "https://github.com/JacopoMangiavacchi/SwiftImageTFRecords", from: "0.0.3")' SwiftImageTFRecords
 ```
 
+## Usage - Create TFRecord from image file
+
+```swift
+import Foundation
+import SwiftImageTFRecords
+
+let imageFileUrl = URL(fileURLWithPath: "image.jpeg")
+let tfrecordUrl = URL(fileURLWithPath: "new.tfrecord")
+
+var imageTFRecords = ImageTFRecords()
+imageTFRecords.images.append(ImageTFRecord(imageFile: imageFileUrl, imageName: "new")!)
+try? imageTFRecords.data.write(to: tfrecordUrl)
+
+```
+
 ## Usage - Resize all images in a TFRecord
 
 ```swift
