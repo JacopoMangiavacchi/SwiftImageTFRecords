@@ -24,15 +24,15 @@ public struct ImageTFRecord {
     var filename: String
     var encoded: Data
     var format: String
-    var annotation: [Annotation]?
+    var annotations: [Annotation]?
 
-    public init(width: Int, height: Int, filename: String, encoded: Data, format: String, annotation: [Annotation]?) {
+    public init(width: Int, height: Int, filename: String, encoded: Data, format: String, annotations: [Annotation]?) {
         self.width = width
         self.height = height
         self.filename = filename
         self.encoded = encoded
         self.format = format
-        self.annotation = annotation
+        self.annotations = annotations
     }
     
     public init(withRecord record: Record) {
@@ -54,12 +54,12 @@ public struct ImageTFRecord {
               xMinArray.count == xMaxArray.count &&
               xMinArray.count == yMaxArray.count &&
               xMinArray.count == textArray.count &&
-              xMinArray.count == labelArray.count else { self.annotation = nil; return }
+              xMinArray.count == labelArray.count else { self.annotations = nil; return }
             
-        self.annotation = [Annotation]()
+        self.annotations = [Annotation]()
         
         for i in 0..<xMinArray.count {
-            self.annotation?.append(Annotation(xMin: xMinArray[i],
+            self.annotations?.append(Annotation(xMin: xMinArray[i],
                                                yMin: yMinArray[i],
                                                xMax: xMaxArray[i],
                                                yMax: yMaxArray[i],
@@ -77,7 +77,16 @@ public struct ImageTFRecord {
         record["image/encoded"] = Feature.Bytes(encoded)
         record["image/format"] = Feature.String(format)
             
-        // TODO Annotations
+        if let annotations = self.annotations {
+            for annotation in annotations {
+                record["image/object/bbox/xmin"] = Feature.Float(annotation.xMin)
+                record["image/object/bbox/ymin"] = Feature.Float(annotation.yMin)
+                record["image/object/bbox/xmax"] = Feature.Float(annotation.xMax)
+                record["image/object/bbox/ymax"] = Feature.Float(annotation.yMax)
+                record["image/object/class/text"] = Feature.String(annotation.text)
+                record["image/object/class/label"] = Feature.Int(annotation.label)
+            }
+        }
         
         return record
     }
