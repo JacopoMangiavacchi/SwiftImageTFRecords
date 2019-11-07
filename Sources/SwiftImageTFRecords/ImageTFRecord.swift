@@ -9,21 +9,21 @@ import Foundation
 import SwiftTFRecords
 
 public struct Annotation {
-    var xMin: Float
-    var yMin: Float
-    var xMax: Float
-    var yMax: Float
-    var text: String
-    var label: Int
+    public var xMin: Float
+    public var yMin: Float
+    public var xMax: Float
+    public var yMax: Float
+    public var text: String
+    public var label: Int
 }
 
 public struct ImageTFRecord {
-    var width: Int
-    var height: Int
-    var filename: String
-    var encoded: Data
-    var format: String
-    var annotations: [Annotation]?
+    public var width: Int
+    public var height: Int
+    public var filename: String
+    public var encoded: Data
+    public var format: String
+    public var annotations: [Annotation]?
 
     public init(width: Int, height: Int, filename: String, encoded: Data, format: String, annotations: [Annotation]?) {
         self.width = width

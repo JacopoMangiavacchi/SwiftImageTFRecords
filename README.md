@@ -10,7 +10,8 @@ If your using this library on a Swift Jupyter or Colab Notebook you may install 
 ```
 %install '.package(url: "https://github.com/JacopoMangiavacchi/SwiftImageTFRecords", from: "0.0.3")' SwiftImageTFRecords
 ```
-## Usage
+
+## Usage - Resize all images in a TFRecord
 
 ```swift
 import Foundation
@@ -20,8 +21,19 @@ let data = try Data(contentsOf: URL(fileURLWithPath: "image.tfrecord"))
 
 let imageTFRecords = ImageTFRecords(withData: data)
 
-// TODO
+print(imageTFRecords.images.count)
+print(imageTFRecords.images.first)
+print(imageTFRecords.images.first?.width, imageTFRecords.images.first?.height)
+print(imageTFRecords.images.first?.validImage(), imageTFRecords.images.first?.realSize())
 
-try? imageTFRecords.data.write(to: URL(fileURLWithPath: "new-image.tfrecord"))
+// Resize all images in the TFRecord
+for (index, _) in imageTFRecords.images.enumerated() {
+    imageTFRecords.images[index].resize(width: 299, height: 299)
+}
+
+print(imageTFRecords.images.first?.width, imageTFRecords.images.first?.height)
+print(imageTFRecords.images.first?.validImage(), imageTFRecords.images.first?.realSize())
+
+try? imageTFRecords.data.write(to: URL(fileURLWithPath: "resized-image.tfrecord"))
 
 ```
