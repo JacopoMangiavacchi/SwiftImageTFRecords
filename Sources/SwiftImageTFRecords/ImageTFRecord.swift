@@ -47,12 +47,25 @@ public struct ImageTFRecord {
         let yMinArray = record["image/object/bbox/ymin"]!.toFloatArray()!
         let xMaxArray = record["image/object/bbox/xmax"]!.toFloatArray()!
         let yMaxArray = record["image/object/bbox/ymax"]!.toFloatArray()!
-        let lextArray = record["image/object/class/text"]!.toStringArray()!
+        let textArray = record["image/object/class/text"]!.toStringArray()!
         let labelArray = record["image/object/class/label"]!.toIntArray()!
 
+        guard xMinArray.count == yMinArray.count &&
+              xMinArray.count == xMaxArray.count &&
+              xMinArray.count == yMaxArray.count &&
+              xMinArray.count == textArray.count &&
+              xMinArray.count == labelArray.count else { self.annotation = nil; return }
+            
+        self.annotation = [Annotation]()
         
-        // TODO Annotations
-        self.annotation = nil
+        for i in 0..<xMinArray.count {
+            self.annotation?.append(Annotation(xMin: xMinArray[i],
+                                               yMin: yMinArray[i],
+                                               xMax: xMaxArray[i],
+                                               yMax: yMaxArray[i],
+                                               text: textArray[i],
+                                               label: labelArray[i]))
+        }
     }
     
     public var record: Record {
