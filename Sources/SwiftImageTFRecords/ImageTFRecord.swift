@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftTFRecords
-import SwiftGD
 
 public struct Annotation {
     var xMin: Float
