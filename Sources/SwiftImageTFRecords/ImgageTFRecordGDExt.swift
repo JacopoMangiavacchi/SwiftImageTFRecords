@@ -45,4 +45,9 @@ extension ImageTFRecord {
 
         return true
     }
+    
+    public var base64PNG: String? {
+        guard let image = try? Image(data: self.encoded) else { return nil }
+        return try? image.export(as: .png).base64EncodedString()
+    }
 }
